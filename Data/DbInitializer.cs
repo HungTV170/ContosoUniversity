@@ -44,7 +44,7 @@ namespace ContosoUniversity.Data{
                 context.SaveChanges();
             }
 
-            if(context.Enrollments.Any()){
+            if(!context.Enrollments.Any()){
                 var enrollments = new Enrollment[]
                 {
                 new Enrollment{StudentID=1,CourseID=1050,Grade=Grade.A},

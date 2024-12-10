@@ -11,6 +11,6 @@ namespace ContosoUniversity.Models{
         [DataType(DataType.Date)]
         public DateTime EnrollmentDate {get; set;}
 
-        public ICollection<Enrollment> Enrollments {get; set;} = null!;
+        public ICollection<Enrollment> Enrollments {get; set;} = [];
     }
 }
