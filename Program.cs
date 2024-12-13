@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -21,7 +22,7 @@ builder.Logging.AddDebug();
 
 builder.Services.AddSignalR();
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+builder.Services.AddIdentity<ContosoUser, IdentityRole>()
     .AddEntityFrameworkStores<SchoolContext>()
     .AddDefaultUI()
     .AddDefaultTokenProviders();

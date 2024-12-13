@@ -1,7 +1,8 @@
+@using ContosoUniversity.Data
 @using Microsoft.AspNetCore.Identity
 
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<ContosoUser> SignInManager
+@inject UserManager<ContosoUser> UserManager
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))

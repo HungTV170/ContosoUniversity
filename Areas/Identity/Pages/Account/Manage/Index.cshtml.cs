@@ -6,6 +6,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using ContosoUniversity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -14,12 +15,12 @@ namespace ContosoUniversity.Areas.Identity.Pages.Account.Manage
 {
     public class IndexModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<ContosoUser> _userManager;
+        private readonly SignInManager<ContosoUser> _signInManager;
 
         public IndexModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            UserManager<ContosoUser> userManager,
+            SignInManager<ContosoUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -58,9 +59,17 @@ namespace ContosoUniversity.Areas.Identity.Pages.Account.Manage
             [Phone]
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
+
+            /// <summary>
+            ///     Part of ContosoStudent
+            /// </summary>
+            [Required]
+            [Display(Name = "Birth Date")]
+            [DataType(DataType.Date)]
+            public DateTime DOB { get; set; }
         }
 
-        private async Task LoadAsync(IdentityUser user)
+        private async Task LoadAsync(ContosoUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
@@ -69,7 +78,8 @@ namespace ContosoUniversity.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                DOB = Convert.ToDateTime(user.DOB)
             };
         }
 
@@ -110,6 +120,12 @@ namespace ContosoUniversity.Areas.Identity.Pages.Account.Manage
                 }
             }
 
+            if (Input.DOB.ToString() != user.DOB)
+            {
+                user.DOB = Input.DOB.ToString();
+            }
+
+            await _userManager.UpdateAsync(user);
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();

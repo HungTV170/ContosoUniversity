@@ -3,6 +3,18 @@
   "WorkspaceRootPath": "D:\\ContosoUniversity\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:areas\\identity\\pages\\account\\register.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\data\\contosouser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:data\\contosouser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\controllers\\departmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:controllers\\departmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -50,11 +62,50 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
+              "Title": "ContosoUser.cs",
+              "DocumentMoniker": "D:\\ContosoUniversity\\Data\\ContosoUser.cs",
+              "RelativeDocumentMoniker": "Data\\ContosoUser.cs",
+              "ToolTip": "D:\\ContosoUniversity\\Data\\ContosoUser.cs",
+              "RelativeToolTip": "Data\\ContosoUser.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-13T07:39:12.608Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\ContosoUniversity\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\ContosoUniversity\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-13T07:33:22.683Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Register.cshtml.cs",
+              "DocumentMoniker": "D:\\ContosoUniversity\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
+              "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
+              "ToolTip": "D:\\ContosoUniversity\\Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
+              "RelativeToolTip": "Areas\\Identity\\Pages\\Account\\Register.cshtml.cs",
+              "ViewState": "AQIAAGcAAAAAAAAAAADwv3wAAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-13T07:32:59.631Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "Details.cshtml",
               "DocumentMoniker": "D:\\ContosoUniversity\\Views\\Departments\\Details.cshtml",
               "RelativeDocumentMoniker": "Views\\Departments\\Details.cshtml",
@@ -66,7 +117,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "Delete.cshtml",
               "DocumentMoniker": "D:\\ContosoUniversity\\Views\\Departments\\Delete.cshtml",
               "RelativeDocumentMoniker": "Views\\Departments\\Delete.cshtml",
@@ -78,7 +129,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "Department.cs",
               "DocumentMoniker": "D:\\ContosoUniversity\\Models\\Department.cs",
               "RelativeDocumentMoniker": "Models\\Department.cs",
@@ -86,12 +137,11 @@
               "RelativeToolTip": "Models\\Department.cs",
               "ViewState": "AQIAABYAAAAAAAAAAAA5wBwAAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T04:42:06.918Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-12T04:42:06.918Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "Instructor.cs",
               "DocumentMoniker": "D:\\ContosoUniversity\\Models\\Instructor.cs",
               "RelativeDocumentMoniker": "Models\\Instructor.cs",
@@ -103,7 +153,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "DepartmentsController.cs",
               "DocumentMoniker": "D:\\ContosoUniversity\\Controllers\\DepartmentsController.cs",
               "RelativeDocumentMoniker": "Controllers\\DepartmentsController.cs",
@@ -116,7 +166,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "Create.cshtml",
               "DocumentMoniker": "D:\\ContosoUniversity\\Views\\Instructors\\Create.cshtml",
               "RelativeDocumentMoniker": "Views\\Instructors\\Create.cshtml",
@@ -128,7 +178,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "OfficeAssignment.cs",
               "DocumentMoniker": "D:\\ContosoUniversity\\Models\\OfficeAssignment.cs",
               "RelativeDocumentMoniker": "Models\\OfficeAssignment.cs",
@@ -140,7 +190,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "Course.cs",
               "DocumentMoniker": "D:\\ContosoUniversity\\Models\\Course.cs",
               "RelativeDocumentMoniker": "Models\\Course.cs",
@@ -152,7 +202,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "InstructorsController.cs",
               "DocumentMoniker": "D:\\ContosoUniversity\\Controllers\\InstructorsController.cs",
               "RelativeDocumentMoniker": "Controllers\\InstructorsController.cs",
@@ -165,7 +215,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 12,
               "Title": "CoursesController.cs",
               "DocumentMoniker": "D:\\ContosoUniversity\\Controllers\\CoursesController.cs",
               "RelativeDocumentMoniker": "Controllers\\CoursesController.cs",

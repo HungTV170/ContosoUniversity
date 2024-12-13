@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ContosoUniversity.Data
 {
-    public class SchoolContext : IdentityDbContext<IdentityUser>
+    public class SchoolContext : IdentityDbContext<ContosoUser>
     {
         public SchoolContext(DbContextOptions<SchoolContext> options) : base(options)
         {
