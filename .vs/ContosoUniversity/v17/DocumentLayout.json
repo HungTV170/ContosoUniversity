@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\ContosoUniversity\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\controllers\\departmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:controllers\\departmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\models\\department.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:models\\department.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -13,10 +17,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\views\\departments\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:views\\departments\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\controllers\\departmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:controllers\\departmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\views\\departments\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -50,7 +50,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
@@ -62,12 +62,11 @@
               "RelativeToolTip": "Views\\Departments\\Details.cshtml",
               "ViewState": "AQIAABIAAAAAAAAAAAAAAB8AAAA7AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-12T06:53:23.194Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-12T06:53:23.194Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Delete.cshtml",
               "DocumentMoniker": "D:\\ContosoUniversity\\Views\\Departments\\Delete.cshtml",
               "RelativeDocumentMoniker": "Views\\Departments\\Delete.cshtml",
@@ -75,25 +74,24 @@
               "RelativeToolTip": "Views\\Departments\\Delete.cshtml",
               "ViewState": "AQIAABUAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-12T06:43:00.133Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-12T06:43:00.133Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Department.cs",
               "DocumentMoniker": "D:\\ContosoUniversity\\Models\\Department.cs",
               "RelativeDocumentMoniker": "Models\\Department.cs",
               "ToolTip": "D:\\ContosoUniversity\\Models\\Department.cs",
               "RelativeToolTip": "Models\\Department.cs",
-              "ViewState": "AQIAABEAAAAAAAAAAAAswBsAAAAaAAAA",
+              "ViewState": "AQIAABYAAAAAAAAAAAA5wBwAAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-12T04:42:06.918Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Instructor.cs",
               "DocumentMoniker": "D:\\ContosoUniversity\\Models\\Instructor.cs",
               "RelativeDocumentMoniker": "Models\\Instructor.cs",
@@ -101,18 +99,17 @@
               "RelativeToolTip": "Models\\Instructor.cs",
               "ViewState": "AQIAAAoAAAAAAAAAAAAQwCAAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-12T03:32:31.153Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-12T03:32:31.153Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "DepartmentsController.cs",
               "DocumentMoniker": "D:\\ContosoUniversity\\Controllers\\DepartmentsController.cs",
               "RelativeDocumentMoniker": "Controllers\\DepartmentsController.cs",
               "ToolTip": "D:\\ContosoUniversity\\Controllers\\DepartmentsController.cs",
               "RelativeToolTip": "Controllers\\DepartmentsController.cs",
-              "ViewState": "AQIAADIAAAAAAAAAAAAowD4AAAANAAAA",
+              "ViewState": "AQIAADIAAAAAAAAAAAAowEQAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-12T04:39:03.871Z",
               "EditorCaption": ""
