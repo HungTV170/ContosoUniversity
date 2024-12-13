@@ -27,6 +27,13 @@ builder.Services.AddIdentity<ContosoUser, IdentityRole>()
     .AddDefaultUI()
     .AddDefaultTokenProviders();
 
+
+// builder.Services.AddIdentity<ContosoUser, IdentityRole>()
+//     .AddDefaultTokenProviders()
+//     .AddUserStore<JsonUserStore>() 
+//     .AddRoleStore<JsonRoleStore>()
+//     .AddDefaultUI(); 
+
 var app = builder.Build();
 using(var scope = app.Services.CreateScope()){
     var serviceProvider = scope.ServiceProvider;
