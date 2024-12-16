@@ -63,6 +63,69 @@ namespace ContosoUniversity.Controllers
             return View(course);
         }
 
+        [HttpPost, ActionName("Details")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DetailsPost(int? id)
+        {
+
+            if (!id.HasValue)
+            {
+                return NotFound();
+            }
+
+            var courseToUpdate = await _context.Courses.FirstOrDefaultAsync(
+                c => c.CourseID == id.Value
+            );
+
+            if(courseToUpdate == null){
+                return NotFound();               
+            }
+
+            if (await TryUpdateModelAsync<Course>(
+                courseToUpdate,
+                "",
+                c => c.Status
+            )){
+                AuthorizationResult isAuthorized;
+
+                if (courseToUpdate.Status == ContactStatus.Approved)
+                {
+                    isAuthorized = await AuthorizationService.AuthorizeAsync(
+                                                        User, courseToUpdate,
+                                                        ResourceOperation.Approve);
+                }
+                else if (courseToUpdate.Status == ContactStatus.Rejected)
+                {
+                    isAuthorized = await AuthorizationService.AuthorizeAsync(
+                                                       User, courseToUpdate,
+                                                       ResourceOperation.Reject);
+                }
+                else
+                {
+                    isAuthorized = AuthorizationResult.Failed();
+                }
+
+                if (!isAuthorized.Succeeded)
+                {
+                    return Forbid();
+                }
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateException /* ex */)
+                {
+                    //Log the error (uncomment ex variable name and write a log.)
+                    ModelState.AddModelError("", "Unable to save changes. " +
+                        "Try again, and if the problem persists, " +
+                        "see your system administrator.");
+                }
+                return RedirectToAction(nameof(Index));
+            }
+
+            PopulateDepartmentsDropDownList(courseToUpdate.DepartmentID);
+            return View(courseToUpdate);
+        }
         // GET: Courses/Create
         public IActionResult Create()
         {
@@ -84,7 +147,13 @@ namespace ContosoUniversity.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CourseID,Title,Credits,DepartmentID")] Course course)
         {
-
+            AuthorizationResult isAuthorized = await AuthorizationService.AuthorizeAsync(
+                                                    User, course,
+                                                    ResourceOperation.Create);  
+            if (!isAuthorized.Succeeded)
+            {
+                return Forbid();
+            }
             try{
                 //ModelState.Remove(nameof(course.Department));
                 if (ModelState.IsValid)
@@ -119,6 +188,13 @@ namespace ContosoUniversity.Controllers
             {
                 return NotFound();
             }
+            var isAuthorized = User.IsInRole(ContosoResource.ContosoManagersRole) ||
+                    User.IsInRole(ContosoResource.ContosoAdministratorsRole);
+
+            if (!isAuthorized)
+            {
+                return Forbid();
+            }            
             PopulateDepartmentsDropDownList(course.DepartmentID);
             return View(course);
         }
@@ -130,6 +206,7 @@ namespace ContosoUniversity.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditPost(int? id)
         {
+
             if (!id.HasValue)
             {
                 return NotFound();
@@ -138,6 +215,14 @@ namespace ContosoUniversity.Controllers
             var courseToUpdate = await _context.Courses.FirstOrDefaultAsync(
                 c => c.CourseID == id.Value
             );
+
+            var isAuthorized = await AuthorizationService.AuthorizeAsync(
+                                        User, courseToUpdate,
+                                        ResourceOperation.Update);
+            if (!isAuthorized.Succeeded)
+            {
+                return Forbid();
+            }
 
             if(courseToUpdate == null){
                 return NotFound();               
@@ -188,6 +273,15 @@ namespace ContosoUniversity.Controllers
                     "Delete failed. Try again, and if the problem persists " +
                     "see your system administrator.";                
             }
+
+            var isAuthorized = User.IsInRole(ContosoResource.ContosoManagersRole) ||
+                    User.IsInRole(ContosoResource.ContosoAdministratorsRole);
+
+            if (!isAuthorized)
+            {
+                return Forbid();
+            }
+
             return View(course);
         }
 
@@ -199,6 +293,14 @@ namespace ContosoUniversity.Controllers
             var course = await _context.Courses
                         .AsNoTracking()
                         .FirstOrDefaultAsync(m => m.CourseID == id);
+
+            var isAuthorized = await AuthorizationService.AuthorizeAsync(
+                                                    User, course,
+                                                    ResourceOperation.Delete);
+            if (!isAuthorized.Succeeded)
+            {
+                return Forbid();
+            }
 
             try{
                 if (course != null)
