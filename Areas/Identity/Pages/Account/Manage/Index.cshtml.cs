@@ -10,6 +10,8 @@ using ContosoUniversity.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.CodeAnalysis.CodeFixes;
+using Microsoft.JSInterop.Infrastructure;
 
 namespace ContosoUniversity.Areas.Identity.Pages.Account.Manage
 {
@@ -66,7 +68,7 @@ namespace ContosoUniversity.Areas.Identity.Pages.Account.Manage
             [Required]
             [Display(Name = "Birth Date")]
             [DataType(DataType.Date)]
-            public DateTime DOB { get; set; }
+            public DateTime? DOB { get; set; }
         }
 
         private async Task LoadAsync(ContosoUser user)
@@ -79,8 +81,9 @@ namespace ContosoUniversity.Areas.Identity.Pages.Account.Manage
             Input = new InputModel
             {
                 PhoneNumber = phoneNumber,
-                DOB = Convert.ToDateTime(user.DOB)
+                DOB = string.IsNullOrEmpty(user.DOB) ? (DateTime?)null : Convert.ToDateTime(user.DOB),
             };
+
         }
 
         public async Task<IActionResult> OnGetAsync()

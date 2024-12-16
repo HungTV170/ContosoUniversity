@@ -34,6 +34,20 @@ builder.Services.AddIdentity<ContosoUser, IdentityRole>()
 //     .AddRoleStore<JsonRoleStore>()
 //     .AddDefaultUI(); 
 
+builder.Services.AddAuthentication().AddGoogle(googleOptions =>
+    {
+        googleOptions.ClientId = builder.Configuration["Authentication:Google:ClientId"]!;
+        googleOptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"]!;
+    }).AddFacebook(facebookOptions =>
+    {
+        facebookOptions.AppId = builder.Configuration["Authentication:Facebook:AppId"]!;
+        facebookOptions.AppSecret = builder.Configuration["Authentication:Facebook:AppSecret"]!;
+        facebookOptions.AccessDeniedPath = "/Identity/Account/Login";
+    }).AddMicrosoftAccount(microsoftOptions =>
+    {
+        microsoftOptions.ClientId = builder.Configuration["Authentication:Microsoft:ClientId"]!;
+        microsoftOptions.ClientSecret = builder.Configuration["Authentication:Microsoft:ClientSecret"]!;
+    });
 var app = builder.Build();
 using(var scope = app.Services.CreateScope()){
     var serviceProvider = scope.ServiceProvider;
