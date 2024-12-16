@@ -1,10 +1,11 @@
+using ContosoUniversity.Authorization;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ContosoUniversity.Models
 {
-    public class Course
+    public class Course : AuthorizationPropertyProvider
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Display(Name = "Number")]
@@ -21,5 +22,6 @@ namespace ContosoUniversity.Models
         public Department? Department { get; set; } 
         public ICollection<Enrollment> Enrollments { get; set; } = [];
         public ICollection<CourseAssignment> CourseAssignments { get; set; } = [];
+
     }
 }

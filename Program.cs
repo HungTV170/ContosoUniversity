@@ -1,5 +1,8 @@
+using ContosoUniversity.Authorization;
 using ContosoUniversity.Data;
 using ContosoUniversity.Hubs;
+using ContosoUniversity.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -48,11 +51,23 @@ builder.Services.AddAuthentication().AddGoogle(googleOptions =>
         microsoftOptions.ClientId = builder.Configuration["Authentication:Microsoft:ClientId"]!;
         microsoftOptions.ClientSecret = builder.Configuration["Authentication:Microsoft:ClientSecret"]!;
     });
+
+// Authorization handlers.
+builder.Services.AddScoped<IAuthorizationHandler,
+                        IsOwerAuthorizationHandler<AuthorizationPropertyProvider>>();
+
+builder.Services.AddSingleton<IAuthorizationHandler,
+                        AdministratorAuthorizationHandler<Object>>();
+
+
+builder.Services.AddSingleton<IAuthorizationHandler,
+                        ManagerAuthorizationHandler<AuthorizationPropertyProvider>>();
 var app = builder.Build();
 using(var scope = app.Services.CreateScope()){
     var serviceProvider = scope.ServiceProvider;
     try{
-        DbInitializer.Initialize(serviceProvider);
+        var testUserPw = builder.Configuration.GetValue<string>("SeedUserPW");
+        await DbInitializer.Initialize(serviceProvider,testUserPw!);
     }catch(Exception ex){
         var logger = serviceProvider.GetRequiredService<ILogger<Program>>();
         logger.LogError(ex, "An error occurred creating the DB.");

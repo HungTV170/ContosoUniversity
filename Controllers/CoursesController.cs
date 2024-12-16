@@ -7,14 +7,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ContosoUniversity.Data;
 using ContosoUniversity.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using ContosoUniversity.Authorization;
 
 namespace ContosoUniversity.Controllers
 {
-    public class CoursesController : Controller
+    public class CoursesController : CTUniversity
     {
         private readonly SchoolContext _context;
 
-        public CoursesController(SchoolContext context)
+        public CoursesController(
+            SchoolContext context,
+            IAuthorizationService authorizationService,
+            UserManager<ContosoUser> userManager
+            ) : base(authorizationService,userManager)
         {
             _context = context;
         }
@@ -22,7 +29,18 @@ namespace ContosoUniversity.Controllers
         // GET: Courses
         public async Task<IActionResult> Index()
         {
-            var schoolContext = _context.Courses.Include(c => c.Department);
+            var isAuthorized = User.IsInRole(ContosoResource.ContosoManagersRole) ||
+                    User.IsInRole(ContosoResource.ContosoAdministratorsRole);
+
+            var currentUserId = UserManager.GetUserId(User);   
+
+            var schoolContext = _context.Courses.Include(c => c.Department).AsQueryable();
+            if (!isAuthorized)
+            {
+                schoolContext = schoolContext.Where(c => c.Status == ContactStatus.Approved
+                                            || c.OwnerID == currentUserId);
+            }     
+
             return View(await schoolContext.AsNoTracking().ToListAsync());
         }
 
@@ -48,6 +66,13 @@ namespace ContosoUniversity.Controllers
         // GET: Courses/Create
         public IActionResult Create()
         {
+            var isAuthorized = User.IsInRole(ContosoResource.ContosoManagersRole) ||
+                    User.IsInRole(ContosoResource.ContosoAdministratorsRole);
+
+            if (!isAuthorized)
+            {
+                return Forbid();
+            }
             PopulateDepartmentsDropDownList();
             return View();
         }
@@ -59,10 +84,12 @@ namespace ContosoUniversity.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CourseID,Title,Credits,DepartmentID")] Course course)
         {
+
             try{
                 //ModelState.Remove(nameof(course.Department));
                 if (ModelState.IsValid)
                 {
+                    course.OwnerID = UserManager.GetUserId(User);
                     _context.Add(course);
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
