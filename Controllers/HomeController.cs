@@ -4,8 +4,11 @@ using ContosoUniversity.Models;
 using ContosoUniversity.Data;
 using ContosoUniversity.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ContosoUniversity.Controllers;
+
+[AllowAnonymous]
 
 public class HomeController : Controller
 {

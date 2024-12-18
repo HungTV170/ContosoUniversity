@@ -22,6 +22,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ContosoUniversity.Areas.Identity.Pages.Account
 {
+    [AllowAnonymous]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<ContosoUser> _signInManager;

@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\ContosoUniversity\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\controllers\\coursescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:controllers\\coursescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -31,10 +35,6 @@
       "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:authorization\\authorizationpropertyprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\models\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:models\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -54,24 +54,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "AdministratorAuthorizationHandler.cs",
-              "DocumentMoniker": "D:\\ContosoUniversity\\Authorization\\AdministratorAuthorizationHandler.cs",
-              "RelativeDocumentMoniker": "Authorization\\AdministratorAuthorizationHandler.cs",
-              "ToolTip": "D:\\ContosoUniversity\\Authorization\\AdministratorAuthorizationHandler.cs",
-              "RelativeToolTip": "Authorization\\AdministratorAuthorizationHandler.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAoAAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-16T06:58:04.43Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "ManagerAuthorizationHandler.cs",
               "DocumentMoniker": "D:\\ContosoUniversity\\Authorization\\ManagerAuthorizationHandler.cs",
               "RelativeDocumentMoniker": "Authorization\\ManagerAuthorizationHandler.cs",
@@ -79,12 +66,11 @@
               "RelativeToolTip": "Authorization\\ManagerAuthorizationHandler.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-16T06:58:04.439Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-16T06:58:04.439Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "CoursesController.cs",
               "DocumentMoniker": "D:\\ContosoUniversity\\Controllers\\CoursesController.cs",
               "RelativeDocumentMoniker": "Controllers\\CoursesController.cs",
@@ -97,7 +83,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "IsOwnerAuthorizationHandler.cs",
               "DocumentMoniker": "D:\\ContosoUniversity\\Authorization\\IsOwnerAuthorizationHandler.cs",
               "RelativeDocumentMoniker": "Authorization\\IsOwnerAuthorizationHandler.cs",
@@ -105,12 +91,36 @@
               "RelativeToolTip": "Authorization\\IsOwnerAuthorizationHandler.cs",
               "ViewState": "AQIAAAgAAAAAAAAAAAAAwB0AAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-16T08:12:31.441Z",
+              "WhenOpened": "2024-12-16T08:12:31.441Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\ContosoUniversity\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\ContosoUniversity\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAAAACMAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-16T06:57:40.652Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
+              "Title": "AdministratorAuthorizationHandler.cs",
+              "DocumentMoniker": "D:\\ContosoUniversity\\Authorization\\AdministratorAuthorizationHandler.cs",
+              "RelativeDocumentMoniker": "Authorization\\AdministratorAuthorizationHandler.cs",
+              "ToolTip": "D:\\ContosoUniversity\\Authorization\\AdministratorAuthorizationHandler.cs",
+              "RelativeToolTip": "Authorization\\AdministratorAuthorizationHandler.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAoAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-16T06:58:04.43Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "ResourceOperation.cs",
               "DocumentMoniker": "D:\\ContosoUniversity\\Authorization\\ResourceOperation.cs",
               "RelativeDocumentMoniker": "Authorization\\ResourceOperation.cs",
@@ -118,12 +128,11 @@
               "RelativeToolTip": "Authorization\\ResourceOperation.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-16T06:55:47.705Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-16T06:55:47.705Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Details.cshtml",
               "DocumentMoniker": "D:\\ContosoUniversity\\Views\\Courses\\Details.cshtml",
               "RelativeDocumentMoniker": "Views\\Courses\\Details.cshtml",
@@ -131,12 +140,11 @@
               "RelativeToolTip": "Views\\Courses\\Details.cshtml",
               "ViewState": "AQIAABIAAAAAAAAAAAAmwCkAAAAcAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-16T10:15:36.729Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-16T10:15:36.729Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "AuthorizationPropertyProvider.cs",
               "DocumentMoniker": "D:\\ContosoUniversity\\Authorization\\AuthorizationPropertyProvider.cs",
               "RelativeDocumentMoniker": "Authorization\\AuthorizationPropertyProvider.cs",
@@ -144,20 +152,7 @@
               "RelativeToolTip": "Authorization\\AuthorizationPropertyProvider.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-16T07:25:34.831Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\ContosoUniversity\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "D:\\ContosoUniversity\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAC4AAAAAAAAAAAAAADgAAABVAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-16T06:57:40.652Z"
+              "WhenOpened": "2024-12-16T07:25:34.831Z"
             },
             {
               "$type": "Document",
