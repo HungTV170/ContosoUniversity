@@ -66,6 +66,8 @@ var app = builder.Build();
 using(var scope = app.Services.CreateScope()){
     var serviceProvider = scope.ServiceProvider;
     try{
+        var context = serviceProvider.GetRequiredService<SchoolContext>();
+        context.Database.Migrate();
         var testUserPw = builder.Configuration.GetValue<string>("SeedUserPW");
         await DbInitializer.Initialize(serviceProvider,testUserPw!);
     }catch(Exception ex){

@@ -13,7 +13,7 @@ namespace ContosoUniversity.Data
         public static void SeedDB(IServiceProvider serviceProvider)
         {
             var context = serviceProvider.GetRequiredService<SchoolContext>();
-            context.Database.Migrate();
+
             //context.Database.EnsureCreated();
 
             // Look for any students.
