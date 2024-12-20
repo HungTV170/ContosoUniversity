@@ -14,4 +14,6 @@ RUN dotnet publish "ContosoUniversity.csproj" -c Release -o /app/publish
 
 FROM base AS final
 COPY --from=publish /app/publish .
+COPY ["mycert.crt",""]
+COPY ["mycert.key",""]
 ENTRYPOINT ["dotnet", "ContosoUniversity.dll"]

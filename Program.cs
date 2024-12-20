@@ -1,16 +1,27 @@
-using ContosoUniversity.Authorization;
+﻿using ContosoUniversity.Authorization;
 using ContosoUniversity.Data;
 using ContosoUniversity.Hubs;
 using ContosoUniversity.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System.Globalization;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
+var supportedCultures = new[] { "en-US", "vi-VN" }; 
+var localizationOptions = new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("vi-VN"), 
+    SupportedCultures = supportedCultures.Select(c => new CultureInfo(c)).ToArray(),
+    SupportedUICultures = supportedCultures.Select(c => new CultureInfo(c)).ToArray()
+};
+
+builder.Services.AddSingleton(localizationOptions);
 builder.Services.AddControllersWithViews(options =>
 {
     var policy = new AuthorizationPolicyBuilder()
@@ -82,7 +93,9 @@ builder.Services.AddSingleton<IAuthorizationHandler,
 builder.Services.AddSingleton<IAuthorizationHandler,
                         ManagerAuthorizationHandler<AuthorizationPropertyProvider>>();
 var app = builder.Build();
-using(var scope = app.Services.CreateScope()){
+
+app.UseRequestLocalization(localizationOptions);
+using (var scope = app.Services.CreateScope()){
     var serviceProvider = scope.ServiceProvider;
     try{
         var context = serviceProvider.GetRequiredService<SchoolContext>();

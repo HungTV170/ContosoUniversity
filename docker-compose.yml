@@ -21,7 +21,8 @@ services:
     # environment:
     #   - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=ContosoUniversity;User Id=sa;Password=YourStrong!Passw0rd;
     ports:
-      - "5135:5134"
+      - "5134:5134"
+      - "5135:5135"
     depends_on:
       - sqlserver
     networks:
