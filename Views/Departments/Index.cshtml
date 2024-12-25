@@ -1,4 +1,4 @@
-@model IEnumerable<ContosoUniversity.Models.Department>
+@model IEnumerable<ContosoUniversity.Models.ViewModels.DepartmentViewModel>
 
 @{
     ViewData["Title"] = "Departments";
@@ -25,7 +25,7 @@
                 @Html.DisplayNameFor(model => model.RowVersion)
             </th> *@
             <th>
-                @Html.DisplayNameFor(model => model.Administrator)
+                @Html.DisplayNameFor(model => model.AdministratorFullName)
             </th>
             <th></th>
         </tr>
@@ -46,7 +46,7 @@
                 @Html.DisplayFor(modelItem => item.RowVersion)
             </td> *@
             <td>
-                @Html.DisplayFor(modelItem => item.Administrator!.FullName)
+                @Html.DisplayFor(modelItem => item.AdministratorFullName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.DepartmentID">Edit</a> |

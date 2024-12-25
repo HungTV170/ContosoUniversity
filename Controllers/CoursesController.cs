@@ -10,20 +10,25 @@ using ContosoUniversity.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using ContosoUniversity.Authorization;
+using AutoMapper;
+using ContosoUniversity.Models.ViewModels;
 
 namespace ContosoUniversity.Controllers
 {
     public class CoursesController : CTUniversity
     {
         private readonly SchoolContext _context;
+        private readonly IMapper _mapper;
 
         public CoursesController(
             SchoolContext context,
             IAuthorizationService authorizationService,
-            UserManager<ContosoUser> userManager
+            UserManager<ContosoUser> userManager,
+            IMapper mapper
             ) : base(authorizationService,userManager)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: Courses
@@ -41,7 +46,8 @@ namespace ContosoUniversity.Controllers
                                             || c.OwnerID == currentUserId);
             }     
 
-            return View(await schoolContext.AsNoTracking().ToListAsync());
+            List<Course> courses = await schoolContext.AsNoTracking().ToListAsync();
+            return View(_mapper.Map<IEnumerable<CourseViewModel>>(courses));
         }
 
         // GET: Courses/Details/5
@@ -60,71 +66,69 @@ namespace ContosoUniversity.Controllers
                 return NotFound();
             }
 
-            return View(course);
+            CourseViewModel courseViewModel = _mapper.Map<CourseViewModel>(course);
+            return View(courseViewModel);
         }
 
         [HttpPost, ActionName("Details")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DetailsPost(int? id)
+        public async Task<IActionResult> DetailsPost(int id,CourseViewModel courseViewModel)
         {
-
-            if (!id.HasValue)
+            if (id != courseViewModel.CourseID)
             {
                 return NotFound();
             }
 
-            var courseToUpdate = await _context.Courses.FirstOrDefaultAsync(
-                c => c.CourseID == id.Value
-            );
-
-            if(courseToUpdate == null){
-                return NotFound();               
-            }
-
-            if (await TryUpdateModelAsync<Course>(
-                courseToUpdate,
-                "",
-                c => c.Status
-            )){
-                AuthorizationResult isAuthorized;
-
-                if (courseToUpdate.Status == ContactStatus.Approved)
-                {
-                    isAuthorized = await AuthorizationService.AuthorizeAsync(
-                                                        User, courseToUpdate,
-                                                        ResourceOperation.Approve);
-                }
-                else if (courseToUpdate.Status == ContactStatus.Rejected)
-                {
-                    isAuthorized = await AuthorizationService.AuthorizeAsync(
-                                                       User, courseToUpdate,
-                                                       ResourceOperation.Reject);
-                }
-                else
-                {
-                    isAuthorized = AuthorizationResult.Failed();
-                }
-
-                if (!isAuthorized.Succeeded)
-                {
-                    return Forbid();
-                }
+            if (ModelState.IsValid)
+            {
                 try
                 {
+                    var courseToUpdate = await _context.Courses.FirstOrDefaultAsync(s => s.CourseID == id);
+                    if (courseToUpdate == null)
+                    {
+                        return NotFound();
+                    }
+
+                    _mapper.Map(courseViewModel, courseToUpdate);
+                    AuthorizationResult isAuthorized;
+
+                    if (courseToUpdate.Status == ContactStatus.Approved)
+                    {
+                        isAuthorized = await AuthorizationService.AuthorizeAsync(
+                                                            User, courseToUpdate,
+                                                            ResourceOperation.Approve);
+                    }
+                    else if (courseToUpdate.Status == ContactStatus.Rejected)
+                    {
+                        isAuthorized = await AuthorizationService.AuthorizeAsync(
+                                                           User, courseToUpdate,
+                                                           ResourceOperation.Reject);
+                    }
+                    else
+                    {
+                        isAuthorized = AuthorizationResult.Failed();
+                    }
+
+                    if (!isAuthorized.Succeeded)
+                    {
+                        return Forbid();
+                    }
+
+
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateException /* ex */)
+                catch (DbUpdateException)
                 {
-                    //Log the error (uncomment ex variable name and write a log.)
-                    ModelState.AddModelError("", "Unable to save changes. " +
-                        "Try again, and if the problem persists, " +
-                        "see your system administrator.");
+                    ModelState.AddModelError("", "Unable to save changes.");
                 }
-                return RedirectToAction(nameof(Index));
             }
 
-            PopulateDepartmentsDropDownList(courseToUpdate.DepartmentID);
-            return View(courseToUpdate);
+
+
+
+            PopulateDepartmentsDropDownList(courseViewModel.DepartmentID);
+            return View(courseViewModel);
         }
         // GET: Courses/Create
         public IActionResult Create()
@@ -145,8 +149,9 @@ namespace ContosoUniversity.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CourseID,Title,Credits,DepartmentID")] Course course)
+        public async Task<IActionResult> Create(CourseViewModel courseViewModel)
         {
+            Course course = _mapper.Map<Course>(courseViewModel);
             AuthorizationResult isAuthorized = await AuthorizationService.AuthorizeAsync(
                                                     User, course,
                                                     ResourceOperation.Create);  
@@ -170,7 +175,7 @@ namespace ContosoUniversity.Controllers
                     "see your system administrator.");
             }
             PopulateDepartmentsDropDownList(course.DepartmentID);
-            return View(course);
+            return View(courseViewModel);
         }
 
         // GET: Courses/Edit/5
@@ -195,60 +200,45 @@ namespace ContosoUniversity.Controllers
             {
                 return Forbid();
             }            
+            CourseViewModel courseViewModel = _mapper.Map<CourseViewModel>(course);
             PopulateDepartmentsDropDownList(course.DepartmentID);
-            return View(course);
+            return View(courseViewModel);
         }
 
         // POST: Courses/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost, ActionName("Edit")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditPost(int? id)
+        public async Task<IActionResult> Edit(int id,CourseViewModel courseViewModel)
         {
 
-            if (!id.HasValue)
-            {
+            if(id != courseViewModel.CourseID){
                 return NotFound();
             }
-
-            var courseToUpdate = await _context.Courses.FirstOrDefaultAsync(
-                c => c.CourseID == id.Value
-            );
-
-            var isAuthorized = await AuthorizationService.AuthorizeAsync(
-                                        User, courseToUpdate,
-                                        ResourceOperation.Update);
-            if (!isAuthorized.Succeeded)
+            
+            if (ModelState.IsValid)
             {
-                return Forbid();
-            }
-
-            if(courseToUpdate == null){
-                return NotFound();               
-            }
-
-            if (await TryUpdateModelAsync<Course>(
-                courseToUpdate,
-                "",
-                c => c.Credits, c => c.DepartmentID, c => c.Title
-            )){
                 try
                 {
+                    var courseToUpdate = await _context.Courses.FirstOrDefaultAsync(s => s.CourseID == id);
+                    if (courseToUpdate == null)
+                    {
+                        return NotFound();
+                    }
+
+                    _mapper.Map(courseViewModel, courseToUpdate);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateException /* ex */)
+                catch (DbUpdateException)
                 {
-                    //Log the error (uncomment ex variable name and write a log.)
-                    ModelState.AddModelError("", "Unable to save changes. " +
-                        "Try again, and if the problem persists, " +
-                        "see your system administrator.");
+                    ModelState.AddModelError("", "Unable to save changes.");
                 }
-                return RedirectToAction(nameof(Index));
             }
 
-            PopulateDepartmentsDropDownList(courseToUpdate.DepartmentID);
-            return View(courseToUpdate);
+            PopulateDepartmentsDropDownList(courseViewModel.DepartmentID);
+            return View(courseViewModel);
         }
 
         // GET: Courses/Delete/5
@@ -282,7 +272,8 @@ namespace ContosoUniversity.Controllers
                 return Forbid();
             }
 
-            return View(course);
+            CourseViewModel courseViewModel = _mapper.Map<CourseViewModel>(course);
+            return View(courseViewModel);
         }
 
         // POST: Courses/Delete/5

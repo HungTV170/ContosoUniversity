@@ -3,64 +3,20 @@
   "WorkspaceRootPath": "D:\\ContosoUniversity\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\controllers\\departmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:controllers\\departmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\views\\departments\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:views\\departments\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\models\\viewmodels\\departmentviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:models\\viewmodels\\departmentviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\models\\department.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:models\\department.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\controllers\\departmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:controllers\\departmentscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\controllers\\coursescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:controllers\\coursescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\authorization\\managerauthorizationhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:authorization\\managerauthorizationhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\authorization\\administratorauthorizationhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:authorization\\administratorauthorizationhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\authorization\\isownerauthorizationhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:authorization\\isownerauthorizationhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\authorization\\resourceoperation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:authorization\\resourceoperation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\views\\courses\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:views\\courses\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\authorization\\authorizationpropertyprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:authorization\\authorizationpropertyprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\models\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:models\\course.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\data\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:data\\dbinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\data\\contosouser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:data\\contosouser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|d:\\contosouniversity\\models\\viewmodels\\mapperinitilizer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E787F908-0488-4257-BAD2-83E7B1156D4C}|ContosoUniversity.csproj|solutionrelative:models\\viewmodels\\mapperinitilizer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -70,194 +26,59 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "D:\\ContosoUniversity\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "D:\\ContosoUniversity\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AQIAADEAAAAAAAAAAAAowEgAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-20T07:35:20.526Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "CoursesController.cs",
-              "DocumentMoniker": "D:\\ContosoUniversity\\Controllers\\CoursesController.cs",
-              "RelativeDocumentMoniker": "Controllers\\CoursesController.cs",
-              "ToolTip": "D:\\ContosoUniversity\\Controllers\\CoursesController.cs",
-              "RelativeToolTip": "Controllers\\CoursesController.cs",
-              "ViewState": "AQIAAJUAAAAAAAAAAAAnwJUAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-11T09:15:40.924Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "DepartmentsController.cs",
-              "DocumentMoniker": "D:\\ContosoUniversity\\Controllers\\DepartmentsController.cs",
-              "RelativeDocumentMoniker": "Controllers\\DepartmentsController.cs",
-              "ToolTip": "D:\\ContosoUniversity\\Controllers\\DepartmentsController.cs",
-              "RelativeToolTip": "Controllers\\DepartmentsController.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAD0AAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-20T07:05:16.77Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Create.cshtml",
-              "DocumentMoniker": "D:\\ContosoUniversity\\Views\\Departments\\Create.cshtml",
-              "RelativeDocumentMoniker": "Views\\Departments\\Create.cshtml",
-              "ToolTip": "D:\\ContosoUniversity\\Views\\Departments\\Create.cshtml",
-              "RelativeToolTip": "Views\\Departments\\Create.cshtml",
-              "ViewState": "AQIAACYAAAAAAAAAAAAmwDIAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-20T07:12:22.565Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\ContosoUniversity\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "D:\\ContosoUniversity\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABIAAAA5AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-16T06:57:40.652Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ManagerAuthorizationHandler.cs",
-              "DocumentMoniker": "D:\\ContosoUniversity\\Authorization\\ManagerAuthorizationHandler.cs",
-              "RelativeDocumentMoniker": "Authorization\\ManagerAuthorizationHandler.cs",
-              "ToolTip": "D:\\ContosoUniversity\\Authorization\\ManagerAuthorizationHandler.cs",
-              "RelativeToolTip": "Authorization\\ManagerAuthorizationHandler.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABkAAAAQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-16T06:58:04.439Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "Department.cs",
               "DocumentMoniker": "D:\\ContosoUniversity\\Models\\Department.cs",
               "RelativeDocumentMoniker": "Models\\Department.cs",
               "ToolTip": "D:\\ContosoUniversity\\Models\\Department.cs",
               "RelativeToolTip": "Models\\Department.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABAAAAAkAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-20T07:14:09.417Z",
+              "WhenOpened": "2024-12-25T08:19:03.381Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "IsOwnerAuthorizationHandler.cs",
-              "DocumentMoniker": "D:\\ContosoUniversity\\Authorization\\IsOwnerAuthorizationHandler.cs",
-              "RelativeDocumentMoniker": "Authorization\\IsOwnerAuthorizationHandler.cs",
-              "ToolTip": "D:\\ContosoUniversity\\Authorization\\IsOwnerAuthorizationHandler.cs",
-              "RelativeToolTip": "Authorization\\IsOwnerAuthorizationHandler.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAAwB0AAAAQAAAA",
+              "DocumentIndex": 1,
+              "Title": "DepartmentViewModel.cs",
+              "DocumentMoniker": "D:\\ContosoUniversity\\Models\\ViewModels\\DepartmentViewModel.cs",
+              "RelativeDocumentMoniker": "Models\\ViewModels\\DepartmentViewModel.cs",
+              "ToolTip": "D:\\ContosoUniversity\\Models\\ViewModels\\DepartmentViewModel.cs",
+              "RelativeToolTip": "Models\\ViewModels\\DepartmentViewModel.cs",
+              "ViewState": "AQIAAB0AAAAAAAAAAAAswBMAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-16T08:12:31.441Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "AdministratorAuthorizationHandler.cs",
-              "DocumentMoniker": "D:\\ContosoUniversity\\Authorization\\AdministratorAuthorizationHandler.cs",
-              "RelativeDocumentMoniker": "Authorization\\AdministratorAuthorizationHandler.cs",
-              "ToolTip": "D:\\ContosoUniversity\\Authorization\\AdministratorAuthorizationHandler.cs",
-              "RelativeToolTip": "Authorization\\AdministratorAuthorizationHandler.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAoAAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-16T06:58:04.43Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ResourceOperation.cs",
-              "DocumentMoniker": "D:\\ContosoUniversity\\Authorization\\ResourceOperation.cs",
-              "RelativeDocumentMoniker": "Authorization\\ResourceOperation.cs",
-              "ToolTip": "D:\\ContosoUniversity\\Authorization\\ResourceOperation.cs",
-              "RelativeToolTip": "Authorization\\ResourceOperation.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAApAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-16T06:55:47.705Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Details.cshtml",
-              "DocumentMoniker": "D:\\ContosoUniversity\\Views\\Courses\\Details.cshtml",
-              "RelativeDocumentMoniker": "Views\\Courses\\Details.cshtml",
-              "ToolTip": "D:\\ContosoUniversity\\Views\\Courses\\Details.cshtml",
-              "RelativeToolTip": "Views\\Courses\\Details.cshtml",
-              "ViewState": "AQIAABIAAAAAAAAAAAAmwCkAAAAcAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-16T10:15:36.729Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "AuthorizationPropertyProvider.cs",
-              "DocumentMoniker": "D:\\ContosoUniversity\\Authorization\\AuthorizationPropertyProvider.cs",
-              "RelativeDocumentMoniker": "Authorization\\AuthorizationPropertyProvider.cs",
-              "ToolTip": "D:\\ContosoUniversity\\Authorization\\AuthorizationPropertyProvider.cs",
-              "RelativeToolTip": "Authorization\\AuthorizationPropertyProvider.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAuAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-16T07:25:34.831Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Course.cs",
-              "DocumentMoniker": "D:\\ContosoUniversity\\Models\\Course.cs",
-              "RelativeDocumentMoniker": "Models\\Course.cs",
-              "ToolTip": "D:\\ContosoUniversity\\Models\\Course.cs",
-              "RelativeToolTip": "Models\\Course.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-16T07:14:25.771Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "DbInitializer.cs",
-              "DocumentMoniker": "D:\\ContosoUniversity\\Data\\DbInitializer.cs",
-              "RelativeDocumentMoniker": "Data\\DbInitializer.cs",
-              "ToolTip": "D:\\ContosoUniversity\\Data\\DbInitializer.cs",
-              "RelativeToolTip": "Data\\DbInitializer.cs",
-              "ViewState": "AQIAABIBAAAAAAAAAAAUwCMBAAAQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-16T06:49:59.477Z",
+              "WhenOpened": "2024-12-25T08:18:41.239Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "ContosoUser.cs",
-              "DocumentMoniker": "D:\\ContosoUniversity\\Data\\ContosoUser.cs",
-              "RelativeDocumentMoniker": "Data\\ContosoUser.cs",
-              "ToolTip": "D:\\ContosoUniversity\\Data\\ContosoUser.cs",
-              "RelativeToolTip": "Data\\ContosoUser.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAABAAAA",
+              "DocumentIndex": 0,
+              "Title": "DepartmentsController.cs",
+              "DocumentMoniker": "D:\\ContosoUniversity\\Controllers\\DepartmentsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\DepartmentsController.cs",
+              "ToolTip": "D:\\ContosoUniversity\\Controllers\\DepartmentsController.cs",
+              "RelativeToolTip": "Controllers\\DepartmentsController.cs",
+              "ViewState": "AQIAAKcAAAAAAAAAAAAnwNIAAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-13T07:39:12.608Z"
+              "WhenOpened": "2024-12-25T07:40:09.767Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MapperInitilizer.cs",
+              "DocumentMoniker": "D:\\ContosoUniversity\\Models\\ViewModels\\MapperInitilizer.cs",
+              "RelativeDocumentMoniker": "Models\\ViewModels\\MapperInitilizer.cs",
+              "ToolTip": "D:\\ContosoUniversity\\Models\\ViewModels\\MapperInitilizer.cs",
+              "RelativeToolTip": "Models\\ViewModels\\MapperInitilizer.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-25T07:39:29.203Z",
+              "EditorCaption": ""
             }
           ]
         }

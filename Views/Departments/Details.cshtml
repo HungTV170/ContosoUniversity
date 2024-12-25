@@ -1,4 +1,4 @@
-@model ContosoUniversity.Models.Department
+@model ContosoUniversity.Models.ViewModels.DepartmentViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -35,10 +35,10 @@
             @Html.DisplayFor(model => model.RowVersion)
         </dd> *@
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Administrator)
+            @Html.DisplayNameFor(model => model.AdministratorFullName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Administrator!.FullName)
+            @Html.DisplayFor(model => model.AdministratorFullName)
         </dd>
     </dl>
 </div>

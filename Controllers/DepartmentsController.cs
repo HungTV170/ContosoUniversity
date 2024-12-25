@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ContosoUniversity.Data;
 using ContosoUniversity.Models;
+using AutoMapper;
+using ContosoUniversity.Models.ViewModels;
 
 namespace ContosoUniversity.Controllers
 {
@@ -14,16 +16,21 @@ namespace ContosoUniversity.Controllers
     {
         private readonly SchoolContext _context;
 
-        public DepartmentsController(SchoolContext context)
+        private readonly IMapper _mapper;
+
+        public DepartmentsController(SchoolContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
+
 
         // GET: Departments
         public async Task<IActionResult> Index()
         {
             var schoolContext = _context.Departments.Include(d => d.Administrator);
-            return View(await schoolContext.AsNoTracking().ToListAsync());
+            List<Department> departments = await schoolContext.AsNoTracking().ToListAsync();
+            return View(_mapper.Map<IEnumerable<DepartmentViewModel>>(departments));
         }
 
         // GET: Departments/Details/5
@@ -42,7 +49,7 @@ namespace ContosoUniversity.Controllers
                 return NotFound();
             }
 
-            return View(department);
+            return View(_mapper.Map<DepartmentViewModel>(department));
         }
 
         // GET: Departments/Create
@@ -57,16 +64,16 @@ namespace ContosoUniversity.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("DepartmentID,Name,Budget,StartDate,InstructorID,RowVersion")] Department department)
+        public async Task<IActionResult> Create(DepartmentViewModel departmentViewModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(department);
+                _context.Add(_mapper.Map<Department>(departmentViewModel));
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["InstructorID"] = new SelectList(_context.Instructors, "ID", "FullName", department.InstructorID);
-            return View(department);
+            ViewData["InstructorID"] = new SelectList(_context.Instructors, "ID", "FullName", departmentViewModel.InstructorID);
+            return View(departmentViewModel);
         }
 
         // GET: Departments/Edit/5
@@ -86,7 +93,7 @@ namespace ContosoUniversity.Controllers
                 return NotFound();
             }
             ViewData["InstructorID"] = new SelectList(_context.Instructors, "ID", "FullName", department.InstructorID);
-            return View(department);
+            return View(_mapper.Map<DepartmentViewModel>(department));
         }
 
         // POST: Departments/Edit/5
@@ -94,38 +101,27 @@ namespace ContosoUniversity.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, byte[] rowVersion)
+        public async Task<IActionResult> Edit(int id, byte[] rowVersion, DepartmentViewModel departmentViewModel)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
             var departmentToUpdate = await _context.Departments.Include(i => i.Administrator).FirstOrDefaultAsync(m => m.DepartmentID == id);
     
             if (departmentToUpdate == null)
             {
-                Department deletedDepartment = new Department();
-                await TryUpdateModelAsync(deletedDepartment);
+                DepartmentViewModel deletedDepartmentViewModel = new DepartmentViewModel();
                 ModelState.AddModelError(string.Empty,
                     "Unable to save changes. The department was deleted by another user.");
-                ViewData["InstructorID"] = new SelectList(_context.Instructors, "ID", "FullName", deletedDepartment.InstructorID);
-                return View(deletedDepartment);
+                ViewData["InstructorID"] = new SelectList(_context.Instructors, "ID", "FullName", deletedDepartmentViewModel.InstructorID);
+                return View(deletedDepartmentViewModel);
             }
 
             _context.Entry(departmentToUpdate).Property("RowVersion").OriginalValue = rowVersion;
 
-            if (await TryUpdateModelAsync<Department>(
-                departmentToUpdate,
-                "",
-                s => s.Name, s => s.StartDate, s => s.Budget, s => s.InstructorID))
-            {
-                try
-                {
+            if(ModelState.IsValid){
+                _mapper.Map(departmentViewModel, departmentToUpdate);
+                try{
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
-                }
-                catch (DbUpdateConcurrencyException ex)
-                {
+                }catch(DbUpdateConcurrencyException ex){
                     var exceptionEntry = ex.Entries.Single();
                     var clientValues = (Department)exceptionEntry.Entity;
                     var databaseEntry = exceptionEntry.GetDatabaseValues();
@@ -166,10 +162,6 @@ namespace ContosoUniversity.Controllers
                     }
                 }
             }
-            if (ModelState.IsValid)
-            {
-
-            }
             ViewData["InstructorID"] = new SelectList(_context.Instructors, "ID", "FullName", departmentToUpdate.InstructorID);
             return View(departmentToUpdate);
         }
@@ -199,22 +191,22 @@ namespace ContosoUniversity.Controllers
                     + "record, click the Delete button again. Otherwise "
                     + "click the Back to List hyperlink.";
             }
-            return View(department);
+            return View(_mapper.Map<DepartmentViewModel>(department));
         }
 
         // POST: Departments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Department department)
+        public async Task<IActionResult> DeleteConfirmed(DepartmentViewModel departmentViewModel)
         {
-            var departmentToDelete = await _context.Departments.FirstAsync(d => d.DepartmentID==department.DepartmentID);
+            var departmentToDelete = await _context.Departments.FirstAsync(d => d.DepartmentID==departmentViewModel.DepartmentID);
 
-            if (!departmentToDelete.RowVersion!.SequenceEqual(department.RowVersion!))
+            if (!departmentToDelete.RowVersion!.SequenceEqual(departmentViewModel.RowVersion!))
             {
-                return RedirectToAction(nameof(Delete), new { concurrencyError = true, id = department.DepartmentID });
+                return RedirectToAction(nameof(Delete), new { concurrencyError = true, id = departmentViewModel.DepartmentID });
             }
             try{
-                if (department != null)
+                if (departmentViewModel != null)
                 {
                     _context.Departments.Remove(departmentToDelete);
                 }
@@ -224,14 +216,10 @@ namespace ContosoUniversity.Controllers
                 return RedirectToAction(nameof(Index));
             }catch(DbUpdateException /** ex **/){
                 //Log the error (uncomment ex variable name and write a log.)
-                return RedirectToAction(nameof(Delete), new { concurrencyError = true, id = department.DepartmentID });
+                return RedirectToAction(nameof(Delete), new { concurrencyError = true, id = departmentViewModel.DepartmentID });
             }
 
         }
 
-        private bool DepartmentExists(int id)
-        {
-            return _context.Departments.Any(e => e.DepartmentID == id);
-        }
     }
 }

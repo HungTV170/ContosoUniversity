@@ -2,7 +2,9 @@
 using ContosoUniversity.Data;
 using ContosoUniversity.Hubs;
 using ContosoUniversity.Models;
+using ContosoUniversity.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -92,6 +94,9 @@ builder.Services.AddSingleton<IAuthorizationHandler,
 
 builder.Services.AddSingleton<IAuthorizationHandler,
                         ManagerAuthorizationHandler<AuthorizationPropertyProvider>>();
+
+builder.Services.AddAutoMapper(typeof(MapperInitilizer));
+
 var app = builder.Build();
 
 app.UseRequestLocalization(localizationOptions);
