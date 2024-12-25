@@ -10,6 +10,7 @@ namespace ContosoUniversity.Models.ViewModels{
         [DisplayName("Last Name")]
         public string LastName {get; set;} = null!;
 
+
         [StringLength(40)]
         [DisplayName("First Name")]
         public string FirstMidName {get; set;} = null!;
@@ -26,6 +27,6 @@ namespace ContosoUniversity.Models.ViewModels{
             }
         }
 
-        public ICollection<EnrollmentViewModel>? Enrollments {get; set;} 
+        public ICollection<EnrollmentViewModel> Enrollments {get; set;} = [];
     }
 }

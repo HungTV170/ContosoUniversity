@@ -23,6 +23,11 @@ namespace ContosoUniversity.Views{
             return new PaginatedList<T>(items, pageIndex, pageSize, count);
         }
 
+        public static PaginatedList<T> Create(IQueryable<T> source, int pageSize, int pageIndex){
+            int count = source.Count();
+            var items = source.Skip((pageIndex - 1)* pageSize).Take(pageSize).ToList();
 
+            return new PaginatedList<T>(items, pageIndex, pageSize, count);
+        }
     }
 }

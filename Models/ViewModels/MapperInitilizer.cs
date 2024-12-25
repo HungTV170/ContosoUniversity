@@ -17,34 +17,41 @@ namespace ContosoUniversity.Models.ViewModels
                 .ForMember(dest => dest.Enrollments, act => act.Ignore());
 
             // CourseAssignment
-            CreateMap<CourseAssignment, CourseAssignmentViewModel>()
-                .ForMember(dest => dest.Instructor, act => act.MapFrom(src => src.Instructor))
-                .ForMember(dest => dest.Course, act => act.MapFrom(src => src.Course))
-                .ReverseMap();
+            CreateMap<CourseAssignment, CourseAssignmentViewModel>();
+            CreateMap<CourseAssignmentViewModel, CourseAssignment>()
+                .ForMember(dest => dest.Instructor, act => act.Ignore())
+                .ForMember(dest => dest.Course, act => act.Ignore());
+
             // Department
             CreateMap<Department, DepartmentViewModel>()
                 .ForMember(dest => dest.AdministratorFullName, act => act.MapFrom(src => src.Administrator!.FullName));
+            
             CreateMap<DepartmentViewModel, Department>()
                 .ForMember(dest => dest.Administrator, act => act.Ignore())
                 .ForMember(dest => dest.Courses, act => act.Ignore());
             // Enrollment
-            CreateMap<Enrollment, EnrollmentViewModel>()
-                .ForMember(dest => dest.Course, act => act.MapFrom(src => src.Course))
-                .ForMember(dest => dest.Student, act => act.MapFrom(src => src.Student))
-                .ReverseMap();
+
             // Instructor
             CreateMap<Instructor, InstructorViewModel>()
-                .ForMember(dest => dest.CourseAssignments, act => act.MapFrom(src => src.CourseAssignments))
-                .ForMember(dest => dest.OfficeAssignment, act => act.MapFrom(src => src.OfficeAssignment))
-                .ReverseMap();
+                .ForMember(dest => dest.OfficeAssignmentLocation, act =>  act.MapFrom(src => src.OfficeAssignment!.Location));
+
+            CreateMap<InstructorViewModel, Instructor>()
+                .ForMember(dest => dest.OfficeAssignment, act => act.MapFrom(
+                    src => src.OfficeAssignmentLocation != null
+                        ? new OfficeAssignment { Location = src.OfficeAssignmentLocation }
+                        : null));
+
+
             // OfficeAssignment
-            CreateMap<OfficeAssignment, OfficeAssignmentViewModel>()
-                .ForMember(dest => dest.Instructor, act => act.MapFrom(src => src.Instructor))
-                .ReverseMap();
+
             // Student
             CreateMap<Student, StudentViewModel>()
-                 .ForMember(dest => dest.Enrollments, act => act.MapFrom(src => src.Enrollments))
-                .ReverseMap();
+                .ForMember(dest => dest.Enrollments, act => act.MapFrom(src =>
+                        src.Enrollments.Select(e => new EnrollmentViewModel
+                        {
+                            Grade = e.Grade,
+                            CourseTitle = e.Course.Title
+                        }).ToList()));
         }
     }
 

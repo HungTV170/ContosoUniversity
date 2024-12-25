@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using ContosoUniversity.Data;
 using ContosoUniversity.Models;
 using ContosoUniversity.Views;
+using AutoMapper;
+using ContosoUniversity.Models.ViewModels;
 
 namespace ContosoUniversity.Controllers
 {
@@ -15,13 +17,16 @@ namespace ContosoUniversity.Controllers
     {
         private readonly SchoolContext _context;
 
-        public StudentsController(SchoolContext context)
+        private readonly IMapper _mapper;
+
+        public StudentsController(SchoolContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: Students
-        public async Task<IActionResult> Index(string sortOrder, string searchString, int? pageNumber, string currentFilter)
+        public IActionResult Index(string sortOrder, string searchString, int? pageNumber, string currentFilter)
         {
             var students = _context.Students.Select(s => s);
             ViewData["NameSortParam"] = string.IsNullOrEmpty(sortOrder) ? "nameDesc" : "";
@@ -61,7 +66,9 @@ namespace ContosoUniversity.Controllers
 
             int pageSize = 4;
 
-            return View(await PaginatedList<Student>.CreateAsync(students.AsNoTracking(),pageSize, pageNumber ?? 1));
+            var studentsDTO = _mapper.Map<IEnumerable<StudentViewModel>>(students.AsNoTracking());
+            //return View(await PaginatedList<Student>.CreateAsync(students.AsNoTracking(),pageSize, pageNumber ?? 1));
+            return View(PaginatedList<StudentViewModel>.Create(studentsDTO.AsQueryable(),pageSize, pageNumber ?? 1));
         }
 
         // GET: Students/Details/5
@@ -82,7 +89,7 @@ namespace ContosoUniversity.Controllers
                 return NotFound();
             }
 
-            return View(student);
+            return View(_mapper.Map<StudentViewModel>(student));
         }
 
         // GET: Students/Create
@@ -96,12 +103,13 @@ namespace ContosoUniversity.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("LastName,FirstMidName,EnrollmentDate")] Student student)
+        public async Task<IActionResult> Create(StudentViewModel studentViewModel)
         {
             try{
                 if (ModelState.IsValid)
                 {
-                    _context.Add(student);
+
+                    _context.Add(_mapper.Map<Student>(studentViewModel));
                     await _context.SaveChangesAsync();
                     return RedirectToAction(nameof(Index));
                 }
@@ -112,7 +120,7 @@ namespace ContosoUniversity.Controllers
                     "see your system administrator.");
             }
 
-            return View(student);
+            return View(studentViewModel);
         }
 
         // GET: Students/Edit/5
@@ -128,7 +136,7 @@ namespace ContosoUniversity.Controllers
             {
                 return NotFound();
             }
-            return View(student);
+            return View(_mapper.Map<StudentViewModel>(student));
         }
 
         // POST: Students/Edit/5
@@ -195,7 +203,7 @@ namespace ContosoUniversity.Controllers
                     "Delete failed. Try again, and if the problem persists " +
                     "see your system administrator.";                
             }
-            return View(student);
+            return View(_mapper.Map<StudentViewModel>(student));
         }
 
         // POST: Students/Delete/5
@@ -218,9 +226,5 @@ namespace ContosoUniversity.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool StudentExists(int id)
-        {
-            return _context.Students.Any(e => e.ID == id);
-        }
     }
 }

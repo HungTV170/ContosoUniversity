@@ -2,16 +2,15 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ContosoUniversity.Models.ViewModels {
-    public class InstructorViewModel {
+namespace ContosoUniversity.Models.ViewModels{
+    public class InstructorViewModel{
+
         public int ID {get; set;}
 
-        [Required]
         [StringLength(40)]
         [DisplayName("Last Name")]
         public string LastName {get; set;} = null!;
 
-        [Required]
         [StringLength(40)]
         [DisplayName("Fisrt Name")]
         public string FirstMidName {get; set;} = null!;
@@ -25,8 +24,12 @@ namespace ContosoUniversity.Models.ViewModels {
         {
             get { return LastName + ", " + FirstMidName; }
         }
-        public ICollection<CourseAssignmentViewModel>? CourseAssignments {get; set;} 
 
-        public OfficeAssignmentViewModel? OfficeAssignment {get; set;} 
+
+        [StringLength(40)]
+        [Display(Name = "Office Location")]
+        public string? OfficeAssignmentLocation {get; set;} 
+
+        public ICollection<CourseAssignmentViewModel>? CourseAssignments {get; set;} 
     }
 }

@@ -1,4 +1,4 @@
-@model ContosoUniversity.Models.Instructor
+@model ContosoUniversity.Models.ViewModels.InstructorViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -29,10 +29,10 @@
             @Html.DisplayFor(model => model.HireDate)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OfficeAssignment)
+            @Html.DisplayNameFor(model => model.OfficeAssignmentLocation)
         </dt>
         <dd class = "col-sm-10">
-            @(Model.OfficeAssignment?.Location ?? "NO LOCATION")
+            @(Model.OfficeAssignmentLocation ?? "NO LOCATION")
         </dd>
     </dl>
 </div>

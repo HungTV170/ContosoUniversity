@@ -163,7 +163,7 @@ namespace ContosoUniversity.Controllers
                 }
             }
             ViewData["InstructorID"] = new SelectList(_context.Instructors, "ID", "FullName", departmentToUpdate.InstructorID);
-            return View(departmentToUpdate);
+            return View(_mapper.Map<DepartmentViewModel>(departmentToUpdate));
         }
 
         // GET: Departments/Delete/5
