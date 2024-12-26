@@ -25,15 +25,16 @@ namespace ContosoUniversity.Models.ViewModels
             // Department
             CreateMap<Department, DepartmentViewModel>()
                 .ForMember(dest => dest.AdministratorFullName, act => act.MapFrom(src => src.Administrator!.FullName));
-            
+
             CreateMap<DepartmentViewModel, Department>()
                 .ForMember(dest => dest.Administrator, act => act.Ignore())
                 .ForMember(dest => dest.Courses, act => act.Ignore());
             // Enrollment
 
+
             // Instructor
             CreateMap<Instructor, InstructorViewModel>()
-                .ForMember(dest => dest.OfficeAssignmentLocation, act =>  act.MapFrom(src => src.OfficeAssignment!.Location));
+                .ForMember(dest => dest.OfficeAssignmentLocation, act => act.MapFrom(src => src.OfficeAssignment!.Location));
 
             CreateMap<InstructorViewModel, Instructor>()
                 .ForMember(dest => dest.OfficeAssignment, act => act.MapFrom(
@@ -52,6 +53,8 @@ namespace ContosoUniversity.Models.ViewModels
                             Grade = e.Grade,
                             CourseTitle = e.Course.Title
                         }).ToList()));
+            CreateMap<StudentViewModel, Student>()
+                .ForMember(dest => dest.Enrollments, act => act.Ignore());
         }
     }
 

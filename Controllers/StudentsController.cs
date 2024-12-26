@@ -10,25 +10,32 @@ using ContosoUniversity.Models;
 using ContosoUniversity.Views;
 using AutoMapper;
 using ContosoUniversity.Models.ViewModels;
+using ContosoUniversity.Repository;
+using System.Linq.Expressions;
 
 namespace ContosoUniversity.Controllers
 {
     public class StudentsController : Controller
     {
-        private readonly SchoolContext _context;
+        private readonly IRepositoryService _context;
 
         private readonly IMapper _mapper;
 
-        public StudentsController(SchoolContext context, IMapper mapper)
+        public StudentsController(IRepositoryService context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
 
         // GET: Students
-        public IActionResult Index(string sortOrder, string searchString, int? pageNumber, string currentFilter)
+        public async Task<IActionResult> Index(string sortOrder, string searchString, int? pageNumber, string currentFilter)
         {
-            var students = _context.Students.Select(s => s);
+            // var students = _context.Students.Select(s => s);
+
+            Expression<Func<Student, bool>>? filter = null;
+            Func<IQueryable<Student>, IOrderedQueryable<Student>>? orderBy;
+            List<string> includeProperties = new List<string>();
+
             ViewData["NameSortParam"] = string.IsNullOrEmpty(sortOrder) ? "nameDesc" : "";
             ViewData["DateSortParam"] =  sortOrder =="date" ? "dateDesc" : "date";
             ViewData["CurrentSort"] = sortOrder;
@@ -42,31 +49,37 @@ namespace ContosoUniversity.Controllers
             ViewData["CurrentFilter"] = currentFilter;
 
             if(!string.IsNullOrEmpty(searchString)){
-                students = students.Where( s => s.LastName.Contains(searchString) 
-                    || s.FirstMidName.Contains(searchString));
+                // students = students.Where( s => s.LastName.Contains(searchString) 
+                //     || s.FirstMidName.Contains(searchString));
+                filter = s => s.LastName.Contains(searchString) || s.FirstMidName.Contains(searchString);
             }
 
 
 
             switch(sortOrder){
                 case "nameDesc":
-                    students = students.OrderByDescending(s => s.LastName);
+                    // students = students.OrderByDescending(s => s.LastName);
+                    orderBy = s => s.OrderByDescending(s => s.LastName);
                     break;
                 case "dateDesc":
-                    students = students.OrderByDescending(s => s.EnrollmentDate);
+                    //students = students.OrderByDescending(s => s.EnrollmentDate);
+                    orderBy = s => s.OrderByDescending(s => s.EnrollmentDate);
                     break;
                 case "date":
-                    students = students.OrderBy(s => s.EnrollmentDate);
+                    //students = students.OrderBy(s => s.EnrollmentDate);
+                    orderBy = s => s.OrderBy(s => s.EnrollmentDate);
                     break;
                 default:
-                    students = students.OrderBy(s => s.LastName);
+                    //students = students.OrderBy(s => s.LastName);
+                    orderBy = s => s.OrderBy(s => s.LastName);
                     break;
 
             }
 
             int pageSize = 4;
 
-            var studentsDTO = _mapper.Map<IEnumerable<StudentViewModel>>(students.AsNoTracking());
+            var students = await _context.Students.GetAllAsync(filter, orderBy, includeProperties);
+            var studentsDTO = _mapper.Map<IEnumerable<StudentViewModel>>(students);
             //return View(await PaginatedList<Student>.CreateAsync(students.AsNoTracking(),pageSize, pageNumber ?? 1));
             return View(PaginatedList<StudentViewModel>.Create(studentsDTO.AsQueryable(),pageSize, pageNumber ?? 1));
         }
@@ -79,11 +92,17 @@ namespace ContosoUniversity.Controllers
                 return NotFound();
             }
 
-            var student = await _context.Students
-                .Include(s => s.Enrollments)
-                    .ThenInclude(e => e.Course)
-                .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.ID == id);
+            // var student = await _context.Students
+            //     .Include(s => s.Enrollments)
+            //         .ThenInclude(e => e.Course)
+            //     .AsNoTracking()
+            //     .FirstOrDefaultAsync(m => m.ID == id);
+
+            var student = await _context.Students.GetTAsync(
+                s => s.ID == id,
+                new List<string>{ "Enrollments.Course" }
+            );
+
             if (student == null)
             {
                 return NotFound();
@@ -109,8 +128,9 @@ namespace ContosoUniversity.Controllers
                 if (ModelState.IsValid)
                 {
 
-                    _context.Add(_mapper.Map<Student>(studentViewModel));
-                    await _context.SaveChangesAsync();
+                    //_context.Add(_mapper.Map<Student>(studentViewModel));
+                    await _context.Students.AddAsync(_mapper.Map<Student>(studentViewModel));
+                    await _context.SaveAsync();
                     return RedirectToAction(nameof(Index));
                 }
             }catch(DbUpdateException /** ex **/){
@@ -131,7 +151,8 @@ namespace ContosoUniversity.Controllers
                 return NotFound();
             }
 
-            var student = await _context.Students.FindAsync(id);
+            //var student = await _context.Students.FindAsync(id);
+            var student = await _context.Students.GetTAsync(s => s.ID == id);
             if (student == null)
             {
                 return NotFound();
@@ -144,33 +165,27 @@ namespace ContosoUniversity.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditPost(int? id)
+        public async Task<IActionResult> EditPost(int id, StudentViewModel studentViewModel)
         {
-            if (id == null)
+            if (id != studentViewModel.ID)
             {
                 return NotFound();
             }
-
-            var studentToUpdate = await _context.Students.FirstOrDefaultAsync(s => s.ID == id);
-            
-            if (studentToUpdate == null)
-            {
-                return NotFound(); 
-            }
-            
-            if(await TryUpdateModelAsync<Student>(
-                studentToUpdate,
-                "",
-                s => s.FirstMidName,
-                s => s.LastName,
-                s => s.EnrollmentDate
-            )){
+            if(ModelState.IsValid){
                 try
                 {
-                    await _context.SaveChangesAsync();
+                    var studentToUpdate = await _context.Students.GetTAsync(s => s.ID == id);
+                    if (studentToUpdate == null)
+                    {
+                        return NotFound(); 
+                    }         
+
+                    _mapper.Map(studentViewModel, studentToUpdate);
+                    _context.Students.Update(studentToUpdate);
+                    await _context.SaveAsync();
                     return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateException /* ex */)
+                catch (DbUpdateException /** ex **/)
                 {
                     //Log the error (uncomment ex variable name and write a log.)
                     ModelState.AddModelError("", "Unable to save changes. " +
@@ -178,8 +193,7 @@ namespace ContosoUniversity.Controllers
                         "see your system administrator.");
                 }
             }
-
-            return View(studentToUpdate);
+            return View(studentViewModel);
         }
 
         // GET: Students/Delete/5
@@ -190,18 +204,21 @@ namespace ContosoUniversity.Controllers
                 return NotFound();
             }
 
-            var student = await _context.Students
-                .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.ID == id);
+            //var student = await _context.Students
+            //    .AsNoTracking()
+            //    .FirstOrDefaultAsync(m => m.ID == id);
+
+            var student = await _context.Students.GetTAsync(s => s.ID == id);
             if (student == null)
             {
                 return NotFound();
             }
 
-            if(saveChangesError.GetValueOrDefault()){
+            if (saveChangesError.GetValueOrDefault())
+            {
                 ViewData["ErrorMessage"] =
                     "Delete failed. Try again, and if the problem persists " +
-                    "see your system administrator.";                
+                    "see your system administrator.";
             }
             return View(_mapper.Map<StudentViewModel>(student));
         }
@@ -211,14 +228,15 @@ namespace ContosoUniversity.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var student = await _context.Students.FindAsync(id);
+            //var student = await _context.Students.FindAsync(id);
+            var student = await _context.Students.GetTAsync(s => s.ID == id);
             try{
                 if (student != null)
                 {
-                    _context.Students.Remove(student);
+                    _context.Students.DeleteEntity(student);
                 }
 
-                await _context.SaveChangesAsync();
+                await _context.SaveAsync();
             }catch(DbUpdateException /** ex **/){
                 return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
             }

@@ -3,6 +3,7 @@ using ContosoUniversity.Data;
 using ContosoUniversity.Hubs;
 using ContosoUniversity.Models;
 using ContosoUniversity.Models.ViewModels;
+using ContosoUniversity.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Identity;
@@ -96,6 +97,8 @@ builder.Services.AddSingleton<IAuthorizationHandler,
                         ManagerAuthorizationHandler<AuthorizationPropertyProvider>>();
 
 builder.Services.AddAutoMapper(typeof(MapperInitilizer));
+
+builder.Services.AddTransient<IRepositoryService, SqlRepositoryService>();
 
 var app = builder.Build();
 

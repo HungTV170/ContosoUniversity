@@ -12,16 +12,17 @@ using Microsoft.AspNetCore.Identity;
 using ContosoUniversity.Authorization;
 using AutoMapper;
 using ContosoUniversity.Models.ViewModels;
+using ContosoUniversity.Repository;
 
 namespace ContosoUniversity.Controllers
 {
     public class CoursesController : CTUniversity
     {
-        private readonly SchoolContext _context;
+        private readonly IRepositoryService _context;
         private readonly IMapper _mapper;
 
         public CoursesController(
-            SchoolContext context,
+            IRepositoryService context,
             IAuthorizationService authorizationService,
             UserManager<ContosoUser> userManager,
             IMapper mapper
@@ -39,15 +40,19 @@ namespace ContosoUniversity.Controllers
 
             var currentUserId = UserManager.GetUserId(User);   
 
-            var schoolContext = _context.Courses.Include(c => c.Department).AsQueryable();
+            //var schoolContext = _context.Courses.Include(c => c.Department).AsQueryable();
+            
+            var schoolContext =await _context.Courses.GetAllAsync(
+                null,null,new List<string>{"Department"}
+            );
+
             if (!isAuthorized)
             {
                 schoolContext = schoolContext.Where(c => c.Status == ContactStatus.Approved
-                                            || c.OwnerID == currentUserId);
+                                            || c.OwnerID == currentUserId).ToList();
             }     
 
-            List<Course> courses = await schoolContext.AsNoTracking().ToListAsync();
-            return View(_mapper.Map<IEnumerable<CourseViewModel>>(courses));
+            return View(_mapper.Map<IEnumerable<CourseViewModel>>(schoolContext));
         }
 
         // GET: Courses/Details/5
@@ -58,9 +63,14 @@ namespace ContosoUniversity.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Courses
-                .Include(c => c.Department)
-                .FirstOrDefaultAsync(m => m.CourseID == id);
+            // var course = await _context.Courses
+            //     .Include(c => c.Department)
+            //     .FirstOrDefaultAsync(m => m.CourseID == id);
+
+            var course = await _context.Courses.GetTAsync(
+                m => m.CourseID == id, 
+                new List<string>{"Department"});
+
             if (course == null)
             {
                 return NotFound();
@@ -83,7 +93,10 @@ namespace ContosoUniversity.Controllers
             {
                 try
                 {
-                    var courseToUpdate = await _context.Courses.FirstOrDefaultAsync(s => s.CourseID == id);
+                    // var courseToUpdate = await _context.Courses.FirstOrDefaultAsync(s => s.CourseID == id);
+                    var courseToUpdate = await _context.Courses.GetTAsync(
+                        s => s.CourseID == id, null);
+
                     if (courseToUpdate == null)
                     {
                         return NotFound();
@@ -114,8 +127,8 @@ namespace ContosoUniversity.Controllers
                         return Forbid();
                     }
 
-
-                    await _context.SaveChangesAsync();
+                    _context.Courses.Update(courseToUpdate);
+                    await _context.SaveAsync();
                     return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateException)
@@ -127,11 +140,11 @@ namespace ContosoUniversity.Controllers
 
 
 
-            PopulateDepartmentsDropDownList(courseViewModel.DepartmentID);
+            await PopulateDepartmentsDropDownListAsync(courseViewModel.DepartmentID);
             return View(courseViewModel);
         }
         // GET: Courses/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             var isAuthorized = User.IsInRole(ContosoResource.ContosoManagersRole) ||
                     User.IsInRole(ContosoResource.ContosoAdministratorsRole);
@@ -140,7 +153,7 @@ namespace ContosoUniversity.Controllers
             {
                 return Forbid();
             }
-            PopulateDepartmentsDropDownList();
+            await PopulateDepartmentsDropDownListAsync();
             return View();
         }
 
@@ -164,8 +177,8 @@ namespace ContosoUniversity.Controllers
                 if (ModelState.IsValid)
                 {
                     course.OwnerID = UserManager.GetUserId(User);
-                    _context.Add(course);
-                    await _context.SaveChangesAsync();
+                    await _context.Courses.AddAsync(course);
+                    await _context.SaveAsync();
                     return RedirectToAction(nameof(Index));
                 }
             }catch(DbUpdateException /** ex **/){
@@ -174,7 +187,7 @@ namespace ContosoUniversity.Controllers
                     "Try again, and if the problem persists " +
                     "see your system administrator.");
             }
-            PopulateDepartmentsDropDownList(course.DepartmentID);
+            await PopulateDepartmentsDropDownListAsync(course.DepartmentID);
             return View(courseViewModel);
         }
 
@@ -186,9 +199,13 @@ namespace ContosoUniversity.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Courses
-                .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.CourseID == id);
+            // var course = await _context.Courses
+            //     .AsNoTracking()
+            //     .FirstOrDefaultAsync(m => m.CourseID == id);
+
+            var course = await _context.Courses.GetTAsync(
+                m => m.CourseID == id, null);
+
             if (course == null)
             {
                 return NotFound();
@@ -201,7 +218,7 @@ namespace ContosoUniversity.Controllers
                 return Forbid();
             }            
             CourseViewModel courseViewModel = _mapper.Map<CourseViewModel>(course);
-            PopulateDepartmentsDropDownList(course.DepartmentID);
+            await PopulateDepartmentsDropDownListAsync(course.DepartmentID);
             return View(courseViewModel);
         }
 
@@ -221,14 +238,19 @@ namespace ContosoUniversity.Controllers
             {
                 try
                 {
-                    var courseToUpdate = await _context.Courses.FirstOrDefaultAsync(s => s.CourseID == id);
+                    // var courseToUpdate = await _context.Courses.FirstOrDefaultAsync(s => s.CourseID == id);
+                    var courseToUpdate = await _context.Courses.GetTAsync(
+                        s => s.CourseID == id, null);
+
                     if (courseToUpdate == null)
                     {
                         return NotFound();
                     }
 
                     _mapper.Map(courseViewModel, courseToUpdate);
-                    await _context.SaveChangesAsync();
+
+                    _context.Courses.Update(courseToUpdate);
+                    await _context.SaveAsync();
                     return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateException)
@@ -237,7 +259,7 @@ namespace ContosoUniversity.Controllers
                 }
             }
 
-            PopulateDepartmentsDropDownList(courseViewModel.DepartmentID);
+            await PopulateDepartmentsDropDownListAsync(courseViewModel.DepartmentID);
             return View(courseViewModel);
         }
 
@@ -249,10 +271,14 @@ namespace ContosoUniversity.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Courses
-                .Include(c => c.Department)
-                .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.CourseID == id);
+            // var course = await _context.Courses
+            //     .Include(c => c.Department)
+            //     .AsNoTracking()
+            //     .FirstOrDefaultAsync(m => m.CourseID == id);
+            var course = await _context.Courses.GetTAsync(
+                m => m.CourseID == id, 
+                new List<string>{"Department"});
+
             if (course == null)
             {
                 return NotFound();
@@ -281,9 +307,12 @@ namespace ContosoUniversity.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var course = await _context.Courses
-                        .AsNoTracking()
-                        .FirstOrDefaultAsync(m => m.CourseID == id);
+            // var course = await _context.Courses
+            //             .AsNoTracking()
+            //             .FirstOrDefaultAsync(m => m.CourseID == id);
+
+            var course  = await _context.Courses.GetTAsync(
+                m => m.CourseID == id, null);
 
             var isAuthorized = await AuthorizationService.AuthorizeAsync(
                                                     User, course,
@@ -296,24 +325,19 @@ namespace ContosoUniversity.Controllers
             try{
                 if (course != null)
                 {
-                    _context.Courses.Remove(course);
+                    _context.Courses.DeleteEntity(course);
                 }
 
-                await _context.SaveChangesAsync();
+                await _context.SaveAsync();
             }catch(DbUpdateException /** ex **/){
                 return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
             }
 
             return RedirectToAction(nameof(Index));
         }
-
-        private bool CourseExists(int id)
-        {
-            return _context.Courses.Any(e => e.CourseID == id);
-        }
-
-        private void PopulateDepartmentsDropDownList(int? departmentID = null){
-            ViewData["DepartmentID"] = new SelectList(_context.Departments.AsNoTracking(), "DepartmentID", "Name", departmentID);
+        private async Task PopulateDepartmentsDropDownListAsync(int? departmentID = null){
+            var source = await _context.Departments.GetAllAsync();
+            ViewData["DepartmentID"] = new SelectList(source, "DepartmentID", "Name", departmentID);
         }
     }
 }
