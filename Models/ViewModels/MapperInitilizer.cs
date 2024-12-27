@@ -37,10 +37,9 @@ namespace ContosoUniversity.Models.ViewModels
                 .ForMember(dest => dest.OfficeAssignmentLocation, act => act.MapFrom(src => src.OfficeAssignment!.Location));
 
             CreateMap<InstructorViewModel, Instructor>()
-                .ForMember(dest => dest.OfficeAssignment, act => act.MapFrom(
-                    src => src.OfficeAssignmentLocation != null
-                        ? new OfficeAssignment { Location = src.OfficeAssignmentLocation }
-                        : null));
+                .ForMember(
+                    dest => dest.OfficeAssignment,
+                    opt => opt.MapFrom<FromViewToInstructorResolver>());
 
 
             // OfficeAssignment
@@ -55,6 +54,32 @@ namespace ContosoUniversity.Models.ViewModels
                         }).ToList()));
             CreateMap<StudentViewModel, Student>()
                 .ForMember(dest => dest.Enrollments, act => act.Ignore());
+        }
+
+        public class FromViewToInstructorResolver() : IValueResolver<InstructorViewModel, Instructor, OfficeAssignment?>
+        {
+            public OfficeAssignment? Resolve(InstructorViewModel source, Instructor destination, OfficeAssignment? destMember, ResolutionContext context)
+            {
+                if (source.OfficeAssignmentLocation == null)
+                    return null;
+
+                if (destination.OfficeAssignment != null)
+                {
+
+                    return new OfficeAssignment()
+                    {
+                        InstructorID = destination.OfficeAssignment.InstructorID,
+                        Location = source.OfficeAssignmentLocation
+                    };
+                }
+                else
+                {
+                    return new OfficeAssignment()
+                    {
+                        Location = source.OfficeAssignmentLocation
+                    };
+                }
+            }
         }
     }
 
