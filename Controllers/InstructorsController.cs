@@ -267,7 +267,7 @@ namespace ContosoUniversity.Controllers
                 {
                     if (!instructorCourse.Contains(item.CourseID))
                     {
-                        instructorToUpdate.CourseAssignments.Add(new CourseAssignment { InstructorID = instructorToUpdate.ID, CourseID = item.CourseID });
+                        //instructorToUpdate.CourseAssignments.Add(new CourseAssignment { InstructorID = instructorToUpdate.ID, CourseID = item.CourseID });
                         await _context.CourseAssignments.AddAsync(new CourseAssignment { InstructorID = instructorToUpdate.ID, CourseID = item.CourseID });
                         
                     }
